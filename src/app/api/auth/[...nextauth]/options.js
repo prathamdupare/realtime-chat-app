@@ -23,6 +23,11 @@ export const options = {
           type: "password",
           placeholder: "your-awesome-password",
         },
+        pssword: {
+          label: "Password:",
+          type: "password",
+          placeholder: "your-awesome-password",
+        },
       },
       async authorize(credentials) {
         // This is where you need to retrieve user data
@@ -44,11 +49,12 @@ export const options = {
   callbacks: {
     async signIn({ user, account }) {
       if (account.provider === "github") {
-        const { name, email } = user;
+        const { name, email, image } = user;
         try {
           await connectMongoDB();
 
-          const userExists = await User.findOne({ email });
+          const userExists = await User.findOne({ image });
+          console.log("User created", user);
 
           if (!userExists) {
             const res = await fetch("http://localhost:3000/api/user", {
@@ -59,6 +65,7 @@ export const options = {
               body: JSON.stringify({
                 name,
                 email,
+                image,
               }),
             });
 

@@ -9,7 +9,7 @@ import Link from "next/link";
 const Navbar = () => {
   const { data: session } = useSession();
   return (
-    <div className=" p-x-2 p-2 flex flex-col gap-2">
+    <div className=" p-x-2 p-2 flex flex-col gap-2 border-b-2">
       <div className="flex flex-row justify-between">
         <div>
           <svg

@@ -4,10 +4,12 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
-    const { name, email } = await request.json();
+    const { name, email, image } = await request.json();
+
+    console.log("Received data:", { name, email, image });
 
     await connectMongoDB();
-    await User.create({ name, email });
+    await User.create({ name, email, image });
 
     return NextResponse.json({ message: "User Registered" }, { status: 201 });
   } catch (error) {
